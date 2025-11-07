@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>딥서치 AI 플랫폼 제안서</title>
+    <title>딥서치 AI 플랫폼 제안서 - 모던 디자인</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Custom Font for Korean readability */
@@ -17,20 +17,17 @@
             width: 8px;
         }
         body::-webkit-scrollbar-thumb {
-            background-color: #3b82f6;
+            background-color: #06b6d4; /* Cyan accent */
             border-radius: 4px;
         }
         body::-webkit-scrollbar-track {
             background-color: #f1f5f9;
         }
-        /* Style to make the business model icons more prominent */
-        .model-icon {
-            display: block;
-            margin: 0 auto 10px auto;
-            color: #1a237e; /* ds-blue */
-            font-size: 3.5rem; 
-            height: 60px;
-            line-height: 60px;
+        /* Style for Business Model SVG Icons */
+        .model-svg-icon {
+            width: 65px;
+            height: 65px;
+            color: #0f172a; /* Dark Charcoal */
         }
         /* Custom colors for Tailwind configuration */
     </style>
@@ -39,279 +36,278 @@
             theme: {
                 extend: {
                     colors: {
-                        'ds-blue': '#1a237e', /* Deep Navy Blue for professionalism */
-                        'ds-light-blue': '#3b82f6',
-                        'ds-accent': '#10b981', /* Green Accent for efficiency/growth */
-                        'ds-bg': '#f9fafb', /* Very light gray background */
-                        'ds-card-bg': '#ffffff',
+                        'ds-primary': '#0f172a', /* Deep Charcoal / Slate */
+                        'ds-secondary': '#1e293b', /* Dark Slate */
+                        'ds-accent': '#06b6d4', /* Cyan Accent for Innovation */
+                        'ds-warning': '#f97316', /* Orange for Alert/Attention */
+                        'ds-background': '#f8fafc', /* Light Background */
+                        'ds-card': '#ffffff',
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-ds-bg text-gray-800">
+<body class="bg-ds-background text-ds-primary">
 
-    <header class="bg-ds-blue text-white py-16 shadow-2xl border-b-4 border-ds-accent">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <h1 class="text-6xl font-extrabold mb-4 tracking-tight">딥서치 AI 플랫폼 제안서</h1>
-            <p class="text-xl font-light max-w-3xl mx-auto opacity-90">
-                데이터를 넘어 **지능적 연결, 분석, 자동화**를 통한 금융 혁신 솔루션
+    <!-- Header Section: Main Title & Subtitle (Dark, Clean Bar) -->
+    <header class="bg-ds-primary text-white py-16 shadow-xl border-b-4 border-ds-accent">
+        <div class="max-w-6xl mx-auto px-6">
+            <h1 class="text-5xl font-black mb-2 tracking-tight">DEEPSEARCH AI PLATFORM</h1>
+            <p class="text-xl font-light opacity-80">
+                Data Science 기반, **고도화된 분석과 자동화**를 위한 차세대 금융 인프라 제안
             </p>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-20">
+    <main class="max-w-6xl mx-auto px-6 py-20">
 
-        <section id="issues" class="mb-20">
-            <h2 class="text-3xl font-bold text-ds-blue mb-12 border-b-4 border-ds-light-blue pb-3 flex items-center">
-                <i class="fas fa-exclamation-triangle mr-3"></i> 현 시스템 진단: 디지털 전환의 병목 현상
+        <!-- Section 1: 기존 서비스 이슈와 AI 고도화 어려움 -->
+        <section id="issues" class="mb-24">
+            <h2 class="text-4xl font-extrabold text-ds-secondary mb-12 border-b-4 border-ds-accent pb-3">
+                <i class="fas fa-chart-line-n mr-3 text-ds-warning"></i> 현황 분석: 디지털 전환의 핵심 난제
             </h2>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="p-8 bg-ds-card-bg rounded-xl shadow-lg border-l-4 border-red-500">
-                    <h3 class="text-2xl font-bold text-red-600 mb-6 flex items-center">
-                        <i class="fas fa-clock mr-3"></i> 비효율적인 운영 환경
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Column 1: 비효율성 -->
+                <div class="lg:col-span-1 p-8 bg-ds-card rounded-xl shadow-2xl border-t-8 border-red-500">
+                    <h3 class="text-2xl font-bold text-red-600 mb-5 flex items-center">
+                        <i class="fas fa-user-clock mr-3"></i> 인력/시간 의존성 심화
                     </h3>
-                    <div class="space-y-4 text-gray-700">
-                        <h4 class="text-lg font-semibold text-gray-800">1. 의사결정 속도 저하</h4>
-                        <ul class="list-disc list-inside ml-4 space-y-1">
-                            <li>방대한 데이터의 **비실시간 수집/분석**으로 전략적 판단 지연</li>
-                            <li>리스크 및 시장 변화에 대한 **즉각적인 대응 능력 부족**</li>
-                        </ul>
-                        <h4 class="text-lg font-semibold text-gray-800 pt-4">2. 인적 자원 의존 심화</h4>
-                        <ul class="list-disc list-inside ml-4 space-y-1">
-                            <li>수동적인 데이터 처리 및 리스크 관리로 **운영 비용** 및 **시간** 과다 소요</li>
-                            <li>24시간 대응 서비스의 **품질 및 일관성** 유지 어려움</li>
-                        </ul>
-                    </div>
+                    <ul class="list-disc list-inside ml-4 space-y-3 text-gray-700 text-sm">
+                        <li>**수동적 데이터 처리**: 수집, 정제, 분석 과정의 높은 인력 의존도로 비용 초과</li>
+                        <li>**24H 대응 한계**: 실시간 시장 상황에 대한 즉각적인 대응 시스템 부재</li>
+                    </ul>
                 </div>
-
-                <div class="p-8 bg-ds-card-bg rounded-xl shadow-lg border-l-4 border-yellow-500">
-                    <h3 class="text-2xl font-bold text-yellow-600 mb-6 flex items-center">
-                        <i class="fas fa-tools mr-3"></i> AI 시스템 구축의 장벽
+                <!-- Column 2: 데이터 한계 -->
+                <div class="lg:col-span-1 p-8 bg-ds-card rounded-xl shadow-2xl border-t-8 border-yellow-500">
+                    <h3 class="text-2xl font-bold text-yellow-600 mb-5 flex items-center">
+                        <i class="fas fa-layer-group mr-3"></i> 파편화된 데이터 인프라
                     </h3>
-                    <div class="space-y-4 text-gray-700">
-                        <h4 class="text-lg font-semibold text-gray-800">1. 학습 데이터의 한계</h4>
-                        <ul class="list-disc list-inside ml-4 space-y-1">
-                            <li>파편화되거나 **미정제된 데이터**가 AI 모델 학습에 부적합</li>
-                            <li>내외부 데이터 간 **연결성 부족**으로 심층 인사이트 도출 불가</li>
-                        </ul>
-                        <h4 class="text-lg font-semibold text-gray-800 pt-4">2. 기술적 및 재정적 부담</h4>
-                        <ul class="list-disc list-inside ml-4 space-y-1">
-                            <li>AI 학습 인프라 구축 및 보안 시스템 확보에 **막대한 초기 비용** 소요</li>
-                            <li>비정형 데이터 처리 및 모델 개발을 위한 **전문 인력 고용 경쟁**</li>
-                        </ul>
-                    </div>
+                    <ul class="list-disc list-inside ml-4 space-y-3 text-gray-700 text-sm">
+                        <li>**AI 학습 부적합**: 기존 데이터의 비정형성, 미정제로 AI 모델 성능 저하</li>
+                        <li>**인사이트 부족**: 데이터 간의 지능적 연결 부재로 심층 분석에 난항</li>
+                    </ul>
+                </div>
+                <!-- Column 3: 비용 장벽 -->
+                <div class="lg:col-span-1 p-8 bg-ds-card rounded-xl shadow-2xl border-t-8 border-ds-accent">
+                    <h3 class="text-2xl font-bold text-ds-accent mb-5 flex items-center">
+                        <i class="fas fa-dollar-sign mr-3"></i> 막대한 도입 비용
+                    </h3>
+                    <ul class="list-disc list-inside ml-4 space-y-3 text-gray-700 text-sm">
+                        <li>**초기 인프라 비용**: 고성능 서버 및 보안 시스템 구축의 재정적 부담</li>
+                        <li>**전문 인력 확보**: MLOps, 데이터 엔지니어링 등 숙련된 인재 고용 경쟁 및 비용 증가</li>
+                    </ul>
                 </div>
             </div>
             
-            <blockquote class="mt-12 p-4 border-l-4 border-gray-400 bg-gray-100 text-gray-700 italic">
-                결론: 신속한 의사결정의 필요성과 높은 AI 도입 비용 간의 격차가 혁신을 저해하는 핵심 요인입니다.
+            <blockquote class="mt-12 p-6 border-l-4 border-ds-primary bg-gray-100 text-gray-800 font-semibold italic shadow-inner">
+                결론: 딥서치 플랫폼은 이 세 가지 난제(인력/시간, 데이터, 비용)를 동시에 해결하여 혁신을 가속화합니다.
             </blockquote>
         </section>
         
-        <section id="solution" class="mb-20">
-            <h2 class="text-3xl font-bold text-ds-blue mb-12 border-b-4 border-ds-accent pb-3 flex items-center">
-                <i class="fas fa-rocket mr-3"></i> 딥서치 AI 플랫폼: 통합 솔루션의 가치
+        <!-- Section 2: DeepSearch AI Platform Solution -->
+        <section id="solution" class="mb-24">
+            <h2 class="text-4xl font-extrabold text-ds-secondary mb-12 border-b-4 border-ds-accent pb-3">
+                <i class="fas fa-star mr-3 text-ds-accent"></i> 딥서치 AI 플랫폼: 핵심 솔루션
             </h2>
-            <p class="text-xl font-semibold text-ds-light-blue mb-10">
-                딥서치는 **데이터 인프라 구축 비용 없이**, 자체 AI 엔진을 활용하여 <span class="underline font-extrabold">신속한 의사결정과 실시간 서비스 제공</span>을 즉시 가능하게 합니다.
+            <p class="text-xl font-medium text-gray-700 mb-10 border-l-4 border-ds-accent pl-4">
+                국내 최대 금융 특화 데이터 인프라와 자체 개발 AI 엔진을 결합하여, **고비용 구조를 혁신**하고 **실시간 의사결정 역량**을 제공합니다.
             </p>
+
+            <!-- 메인 이미지 블록: 데이터 인프라 & AI 엔진 (옆으로 배치) -->
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-8 mb-16 p-8 bg-ds-card rounded-xl shadow-2xl border-t-8 border-ds-primary">
+                <div class="text-center w-full md:w-1/2">
+                    <p class="text-lg font-semibold text-ds-primary mb-3">Data Infra (데이터 인프라)</p>
+                    <img src="스크린샷 2025-11-06 121829.png" 
+                         alt="딥서치 데이터 인프라 구성도" 
+                         class="mx-auto w-full max-w-sm h-auto border-4 border-ds-secondary rounded-lg"/>
+                </div>
+                <div class="text-center w-full md:w-1/2">
+                    <p class="text-lg font-semibold text-ds-primary mb-3">AI Engine (AI 엔진)</p>
+                    <img src="스크린샷 2025-11-06 121839.png" 
+                         alt="딥서치 AI 엔진 구성도" 
+                         class="mx-auto w-full max-w-sm h-auto border-4 border-ds-secondary rounded-lg"/>
+                </div>
+            </div>
+
+            <!-- 데이터 자산 상세 테이블 -->
+            <div class="bg-ds-card p-10 rounded-xl shadow-2xl border-l-8 border-ds-accent">
+                <h3 class="text-2xl font-bold text-ds-primary mb-8 flex items-center">
+                    <i class="fas fa-table mr-3 text-ds-accent"></i> AI 학습에 최적화된 데이터셋 및 가치
+                </h3>
+                
+                <div class="overflow-x-auto mb-10">
+                    <table class="min-w-full divide-y divide-gray-300 border border-gray-300">
+                        <thead class="bg-ds-secondary text-white">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-sm font-extrabold uppercase tracking-wider">구분</th>
+                                <th scope="col" class="px-6 py-3 text-left text-sm font-extrabold uppercase tracking-wider">주요 항목</th>
+                                <th scope="col" class="px-6 py-3 text-left text-sm font-extrabold uppercase tracking-wider">데이터 규모/기간</th>
+                                <th scope="col" class="px-6 py-3 text-left text-sm font-extrabold uppercase tracking-wider">활용 가치</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-ds-card divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-normal font-bold text-ds-primary">기업 데이터</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">개요, 현황, 상세 재무, 주주, 신용, 컨센서스 등</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">10년 이상, 국내 상장/비상장, 미국 상장, 경쟁사 </td>
+                                <td class="px-6 py-4 whitespace-normal text-ds-accent font-semibold">정밀한 기업 가치 분석 자동화</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-normal font-bold text-ds-primary">시장 데이터</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">주가, 배당, 수익률, 거래관련, 투자지표 (PER, EPS 등)</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">KOSPI/KOSDAQ/KONEX 전종목</td>
+                                <td class="px-6 py-4 whitespace-normal text-ds-accent font-semibold">실시간 투자 전략 및 알고리즘 수립</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-normal font-bold text-ds-primary">비정형 문서</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">뉴스, 공시, 증권사 리포트, IR, 어닝콜, 특허, ETF</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">국내 뉴스 1990년~, 공시 1999년~, IR 2014년~,<br>증권사리포트 2005년~, 특허 1948년~</td>
+                                <td class="px-6 py-4 whitespace-normal text-ds-accent font-semibold">AI 학습 기반 리스크 및 트렌드 모니터링</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-10 p-6 bg-ds-primary/5 rounded-xl border border-ds-primary/20 text-gray-800">
+                    <h4 class="text-xl font-bold mb-3 flex items-center text-ds-primary"><i class="fas fa-check-circle mr-2 text-ds-accent"></i> 핵심 데이터 활용 예시 및 ROI</h4>
+                    <p class="text-sm font-normal">
+                        AI 학습 인프라와 데이터 정제 인력 고용 없이 **즉시 AI 학습 데이터 사용 가능**.
+                    </p>
+                    <ul class="list-disc list-inside ml-4 text-sm space-y-1 mt-3">
+                        <li>해외 뉴스/공시를 AI가 문맥적으로 이해하여 자동 국문 요약 제공</li>
+                        <li>뉴스에 **AI 기반 기업/산업/ESG 태깅** 및 긍/부정 판단 적용</li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-ds-accent/10 border border-ds-accent text-ds-primary font-semibold text-sm rounded-lg">
+                         → 데이터 처리/정제 비용 100% 절감, 전문 인력 비용 80% 이상 절감 효과.
+                    </div>
+                </div>
+            </div>
             
-            <div class="image-container-flex mb-12 border-t-4 border-ds-light-blue bg-ds-card-bg shadow-xl">
-                <div class="text-center w-full">
-                    <h3 class="text-2xl font-bold text-ds-blue mb-4">DeepSearch Data Infra & AI Engine</h3>
-                    <img src="데이터엔진.png" 
-                         alt="딥서치 데이터 인프라 및 AI 엔진 구성도" 
-                         class="mx-auto w-full h-auto"/>
-                </div>
-            </div>
-
-            <div class="bg-ds-card-bg p-8 rounded-xl shadow-xl mb-12 border-l-8 border-ds-accent">
-                <h3 class="text-2xl font-bold text-ds-accent mb-6 flex items-center">
-                    <i class="fas fa-layer-group mr-3"></i> 핵심 데이터 자산 현황 및 활용 가치
-                </h3>
-                
-                <div class="mb-8">
-                    <h4 class="text-xl font-bold text-ds-blue mb-4 flex items-center"><i class="fas fa-database mr-2"></i> 축적된 데이터셋 현황</h4>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-300 border border-gray-300">
-                            <thead class="bg-ds-blue text-white">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-sm font-extrabold uppercase tracking-wider">구분</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-sm font-extrabold uppercase tracking-wider">주요 항목</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-sm font-extrabold uppercase tracking-wider">데이터 규모/기간</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-sm font-extrabold uppercase tracking-wider">활용 가치</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-normal font-bold text-ds-blue">기업 데이터</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm">개요, 현황, 상세 재무, 주주, 신용, 컨센서스 등</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm">10년 이상, 국내 상장/비상장, 미국 상장, 경쟁사 </td>
-                                    <td class="px-6 py-4 whitespace-normal text-ds-accent font-semibold">정밀한 기업 가치 분석 자동화</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-normal font-bold text-ds-blue">시장 데이터</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm">주가, 배당, 수익률, 거래관련, 투자지표 (PER, EPS 등)</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm">KOSPI/KOSDAQ/KONEX 전종목</td>
-                                    <td class="px-6 py-4 whitespace-normal text-ds-accent font-semibold">실시간 투자 전략 및 알고리즘 수립</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-normal font-bold text-ds-blue">비정형 문서</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm">뉴스, 공시, 증권사 리포트, IR, 어닝콜, 특허, ETF</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm">국내 뉴스 1990년~, 공시 1999년~, IR 2014년~,<br>증권사리포트 2005년~, 특허 1948년~</td>
-                                    <td class="px-6 py-4 whitespace-normal text-ds-accent font-semibold">AI 학습 기반 리스크 및 트렌드 모니터링</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-6 text-gray-700 mt-10">
-                    <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
-                        <h4 class="font-bold text-lg mb-3 text-ds-blue flex items-center">
-                            <i class="fas fa-chart-area mr-2 text-ds-accent"></i> AI 활용 데이터 예시
-                        </h4>
-                        <ul class="list-disc list-inside ml-4 text-sm space-y-1 mt-4">
-                            <li>뉴스에 **AI 기반 기업/산업/ESG 태깅** 및 긍/부정/중요도 판단 자동 적용 </li>
-                            <li>해외 뉴스/공시/어닝콜을 AI가 **문맥적으로 이해**하여 국문 요약본 제공</li>
-                            <li>AI 모델 학습에 즉시 활용 가능하도록 **저작권 문제 없는 인사이트 콘텐츠** 제공</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="p-6 bg-green-50 rounded-xl border border-green-300">
-                        <h4 class="text-xl font-bold mb-3 flex items-center text-green-700"><i class="fas fa-money-bill-wave mr-2"></i> 플랫폼 도입 효과 (ROI)</h4>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full text-sm">
-                                <tr>
-                                    <td class="px-2 py-1 font-medium text-ds-blue">데이터 처리/정제 비용</td>
-                                    <td class="px-2 py-1 text-center font-bold text-red-600">100% 절감</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-2 py-1 font-medium text-ds-blue">전문 인력(MLOps/Data Eng.) 비용</td>
-                                    <td class="px-2 py-1 text-center font-bold text-red-600">80% 이상 절감</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <blockquote class="mt-4 text-sm font-semibold text-green-700 italic">
-                            즉시 활용 가능한 데이터로 AI 개발 기간과 비용을 획기적으로 단축합니다.
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-ds-card-bg p-8 rounded-xl shadow-xl border-l-8 border-ds-light-blue">
-                <h3 class="text-2xl font-bold text-ds-blue mb-6 flex items-center">
-                    <i class="fas fa-arrows-to-dot mr-3"></i> AI 기반 연결된 데이터의 강력한 인사이트
-                </h3>
-                <p class="text-gray-700 mb-6">
-                    진정한 강점은 데이터를 단순히 나열하는 것이 아니라, **AI 기술**을 통해 지능적으로 연결하여 시너지를 발생시키는 데 있습니다.
-                </p>
-
-                <div class="space-y-4">
-                    <div class="p-4 bg-gray-50 rounded-lg border-b border-ds-light-blue flex items-start">
-                        <i class="fas fa-chart-pie text-3xl text-ds-light-blue mr-4 mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-xl text-ds-light-blue mb-1">시장 + 뉴스, 공시 연동 분석</h4>
-                            <p class="text-gray-700 text-base">
-                                ‘주가 등락'과 그 '이유가 되는 뉴스/공시’를 실시간으로 매핑하여 **가격 변동성 원인 분석**을 자동화하고, 즉시적인 투자 인사이트를 제공합니다.
-                            </p>
-                        </div>
-                    </div>
-                    </div>
-                
-                <blockquote class="mt-8 p-4 border-l-4 border-ds-blue bg-gray-100 text-gray-700 font-semibold italic">
-                    방대한 데이터를 연결하여 유의미한 인사이트를 추출하며, 이는 **신속한 의사결정 지원** 및 **실시간 서비스 제공**으로 직결됩니다.
-                </blockquote>
-            </div>
+            <blockquote class="mt-12 p-6 border-l-4 border-ds-accent bg-ds-primary/10 text-gray-800 font-semibold italic shadow-inner">
+                딥서치 AI 플랫폼은 파편화된 데이터를 연결하고 **AI 엔진**을 통해 시너지를 극대화하여 **신속한 의사결정 및 실시간 서비스 제공**을 가능하게 합니다.
+            </blockquote>
         </section>
 
-        <section id="use-cases" class="mb-20">
-            <h2 class="text-3xl font-bold text-ds-blue mb-12 border-b-4 border-ds-light-blue pb-3 flex items-center">
-                <i class="fas fa-cogs mr-3"></i> 🛠️ 핵심 활용 사례: AI 기반 컨텐츠 자동화
+        <!-- Section 3: 활용 사례 서비스 -->
+        <section id="use-cases" class="mb-24">
+            <h2 class="text-4xl font-extrabold text-ds-secondary mb-12 border-b-4 border-ds-accent pb-3">
+                <i class="fas fa-cogs mr-3 text-ds-accent"></i> 🛠️ 핵심 활용 사례: AI 기반 자동화 서비스
             </h2>
-            <p class="text-xl font-medium text-gray-700 mb-8">뉴스, 기업, 시장 데이터를 연결하여 고객 서비스와 내부 의사결정 프로세스를 혁신합니다.</p>
+            <p class="text-lg font-medium text-gray-700 mb-10">데이터 연결을 통해 고객 경험을 혁신하고 내부 프로세스를 자동화합니다.</p>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="p-6 bg-ds-card-bg rounded-xl shadow-lg border-l-4 border-ds-accent">
+                <!-- AI Automated Report -->
+                <div class="p-6 bg-ds-card rounded-xl shadow-lg border-l-4 border-ds-accent hover:shadow-2xl transition duration-300">
                     <i class="fas fa-file-invoice text-4xl text-ds-accent mb-3"></i>
-                    <h3 class="font-bold text-xl text-ds-accent mb-2">AI 자동화 보고서 생성 </h3>
-                    <p class="text-sm text-gray-600">다양한 연결 데이터를 기반으로 **AI 애널리스트 보고서**를 자동으로 구축합니다.</p>
+                    <h3 class="font-bold text-xl text-ds-primary mb-2">AI 자동화 보고서 생성 </h3>
+                    <p class="text-sm text-gray-600">연결 데이터를 기반으로 **AI 애널리스트 보고서**를 자동으로 구축하여 시간과 비용을 절감합니다.</p>
                 </div>
-                <div class="p-6 bg-ds-card-bg rounded-xl shadow-lg border-l-4 border-ds-accent">
+                <!-- Daily Briefing & Personalization -->
+                <div class="p-6 bg-ds-card rounded-xl shadow-lg border-l-4 border-ds-accent hover:shadow-2xl transition duration-300">
                     <i class="fas fa-calendar-day text-4xl text-ds-accent mb-3"></i>
-                    <h3 class="font-bold text-xl text-ds-accent mb-2">데일리 브리핑 및 맞춤 알림</h3>
-                    <p class="text-sm text-gray-600">한국/미국 주식 및 ETF의 등락 이유를 분석하고, **개인화된 포트폴리오 브리핑**을 제공합니다.</p>
+                    <h3 class="font-bold text-xl text-ds-primary mb-2">데일리 브리핑 및 개인화</h3>
+                    <p class="text-sm text-gray-600">포트폴리오 기반 맞춤 브리핑 및 주식/ETF 등락 이유를 분석하여 **고객 알림 서비스**와 연계합니다.</p>
                 </div>
-                <div class="p-6 bg-ds-card-bg rounded-xl shadow-lg border-l-4 border-red-500 col-span-full lg:col-span-1">
-                    <h3 class="font-bold text-xl text-red-600 mb-2 flex items-center"><i class="fas fa-shield-alt mr-2"></i> 실시간 리스크 모니터링 </h3>
+                <!-- Risk Monitoring -->
+                <div class="p-6 bg-ds-card rounded-xl shadow-lg border-l-4 border-red-500 hover:shadow-2xl transition duration-300">
+                    <i class="fas fa-shield-alt text-4xl text-red-600 mb-3"></i>
+                    <h3 class="font-bold text-xl text-red-600 mb-2">실시간 리스크 모니터링 </h3>
                     <p class="text-sm text-gray-600">
-                        기업 + 뉴스 + 공시 + **내부문서**를 통합 연결하여 AI가 24시간 모니터링합니다. 내부 가이드라인을 학습한 AI가 이상 징후를 **조기 경보**합니다.
+                        AI가 **내부 가이드라인**을 학습하여 이상 징후를 **조기에 경보**하고, 리스크 요인 판단을 자동화합니다.
                     </p>
                 </div>
-                <div class="p-6 bg-ds-card-bg rounded-xl shadow-lg border-l-4 border-ds-blue col-span-full">
-                    <h3 class="font-bold text-xl text-ds-blue mb-2 flex items-center"><i class="fas fa-brain mr-2"></i> 내부 지식 인프라 고도화 (RAG) </h3>
+                <!-- Internal Knowledge Base -->
+                <div class="p-6 bg-ds-card rounded-xl shadow-lg border-l-4 border-ds-primary col-span-full">
+                    <i class="fas fa-brain text-4xl text-ds-primary mb-3"></i>
+                    <h3 class="font-bold text-xl text-ds-primary mb-2">내부 지식 인프라 고도화 (RAG) </h3>
                     <p class="text-sm text-gray-600">
-                        증권사 리포트, IR, 내부 문서 등 비정형 데이터를 통합하고, **질의/응답이 가능한 지식 인프라**를 구축하여 내부 업무 효율성을 높입니다.
+                        내부 문서, 리포트 등을 통합하고 **질의/응답이 가능한 지식 인프라**를 구축하여 내부 업무 효율성을 높입니다.
                     </p>
                 </div>
             </div>
         </section>
 
-        <section id="business-model" class="mb-20">
-            <h2 class="text-3xl font-bold text-ds-blue mb-12 border-b-4 border-ds-light-blue pb-3 flex items-center">
-                <i class="fas fa-chart-pie mr-3"></i> 📊 딥서치 비즈니스 모델 & 레퍼런스
+        <!-- Section 4: 비즈니스 모델 & 레퍼런스 -->
+        <section id="business-model" class="mb-24">
+            <h2 class="text-4xl font-extrabold text-ds-secondary mb-12 border-b-4 border-ds-accent pb-3">
+                <i class="fas fa-sitemap mr-3 text-ds-accent"></i> 딥서치 비즈니스 모델 및 성장 축
             </h2>
             
-            <p class="text-gray-700 mb-8 text-lg font-medium">AI 활용이 필요한 모든 금융 분야에서 컨텐츠 혁신과 업무 효율화를 지원합니다.</p>
+            <p class="text-lg font-medium text-gray-700 mb-10">AI 플랫폼을 기반으로 금융 시장의 핵심 가치 창출 영역을 지원합니다.</p>
 
-            <div class="grid md:grid-cols-4 gap-6 text-center">
-                <div class="p-8 bg-ds-card-bg rounded-xl shadow-xl border-t-4 border-ds-blue hover:shadow-2xl transition duration-300">
-                    <i class="fas fa-magnifying-glass-chart model-icon"></i>
-                    <h3 class="text-xl font-bold text-ds-blue mb-2">정보</h3>
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <!-- 1. 정보 -->
+                <div class="p-8 bg-ds-card rounded-xl shadow-2xl border-b-4 border-ds-accent hover:border-ds-primary transition duration-300">
+                    <svg class="model-svg-icon mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 19c6.075 0 11-4.925 11-11S17.075-3 11-3 0 1.925 0 8s4.925 11 11 11zM21 21l-4.35-4.35M7 3h10v10H7z"/>
+                        <path d="M7 3h10v10H7z" />
+                        <path d="M7 7h10" />
+                        <path d="M7 11h10" />
+                    </svg>
+                    <h3 class="text-xl font-bold text-ds-primary mb-2">정보</h3>
                     <p class="text-sm text-gray-600">기업/주식/ETF 데이터 서비스</p>
                     <span class="block font-bold text-ds-accent mt-3 text-sm">-> AI 애널리스트</span>
                 </div>
-                <div class="p-8 bg-ds-card-bg rounded-xl shadow-xl border-t-4 border-ds-blue hover:shadow-2xl transition duration-300">
-                    <i class="fas fa-balance-scale model-icon"></i>
-                    <h3 class="text-xl font-bold text-ds-blue mb-2">평가</h3>
+                <!-- 2. 평가 -->
+                <div class="p-8 bg-ds-card rounded-xl shadow-2xl border-b-4 border-ds-accent hover:border-ds-primary transition duration-300">
+                    <svg class="model-svg-icon mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3h.01"></path>
+                        <path d="M16.5 7.5L12 12 7.5 7.5"></path>
+                        <path d="M12 12L12 21"></path>
+                        <path d="M3 16.5h18"></path>
+                        <path d="M3 16.5c-2.2 0-3 1.5-3 1.5s.8 1.5 3 1.5h18c2.2 0 3-1.5 3-1.5s-.8-1.5-3-1.5h-18z"></path>
+                    </svg>
+                    <h3 class="text-xl font-bold text-ds-primary mb-2">평가</h3>
                     <p class="text-sm text-gray-600">기업 가치 및 금융 상품 평가</p>
                     <span class="block font-bold text-ds-accent mt-3 text-sm">-> AI 평가전문가</span>
                 </div>
-                <div class="p-8 bg-ds-card-bg rounded-xl shadow-xl border-t-4 border-ds-blue hover:shadow-2xl transition duration-300">
-                    <i class="fas fa-handshake-simple model-icon"></i>
-                    <h3 class="text-xl font-bold text-ds-blue mb-2">중개</h3>
+                <!-- 3. 중개 -->
+                <div class="p-8 bg-ds-card rounded-xl shadow-2xl border-b-4 border-ds-accent hover:border-ds-primary transition duration-300">
+                    <svg class="model-svg-icon mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 19H7c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2z"></path>
+                        <path d="M17 19L21 21M7 5L3 3"></path>
+                        <path d="M12 12l2 2-2 2-2-2 2-2z"></path>
+                        <path d="M17 7h-2c-1.1 0-2 .9-2 2v2"></path>
+                        <path d="M7 17h2c1.1 0 2-.9 2-2v-2"></path>
+                    </svg>
+                    <h3 class="text-xl font-bold text-ds-primary mb-2">중개</h3>
                     <p class="text-sm text-gray-600">기업 중개 플랫폼 (M&A, 실사/평가)</p>
                     <span class="block font-bold text-ds-accent mt-3 text-sm">-> AI M&A 전문가</span>
                 </div>
-                <div class="p-8 bg-ds-card-bg rounded-xl shadow-xl border-t-4 border-ds-blue hover:shadow-2xl transition duration-300">
-                    <i class="fas fa-sack-dollar model-icon"></i>
-                    <h3 class="text-xl font-bold text-ds-blue mb-2">운용</h3>
+                <!-- 4. 운용 -->
+                <div class="p-8 bg-ds-card rounded-xl shadow-2xl border-b-4 border-ds-accent hover:border-ds-primary transition duration-300">
+                    <svg class="model-svg-icon mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 3v18h18M18.73 10.73L12 18 7 13 3 17"></path>
+                        <path d="M18.73 10.73V18h-7.27"></path>
+                    </svg>
+                    <h3 class="text-xl font-bold text-ds-primary mb-2">운용</h3>
                     <p class="text-sm text-gray-600">금융 상품 운용 및 인덱싱</p>
                     <span class="block font-bold text-ds-accent mt-3 text-sm">-> AI 투자 전문가</span>
                 </div>
             </div>
             
-            <div class="mt-16 p-8 bg-ds-card-bg rounded-xl shadow-xl border-l-8 border-gray-400">
-                <h3 class="text-2xl font-bold text-ds-blue mb-4 flex items-center">
-                    <i class="fas fa-award mr-3 text-yellow-500"></i> 검증된 기술력과 주요 고객사 레퍼런스
+            <!-- Reference (이미지 크기 확대) -->
+            <div class="mt-16 p-10 bg-ds-card rounded-xl shadow-2xl border-l-8 border-ds-accent">
+                <h3 class="text-2xl font-bold text-ds-primary mb-4 flex items-center">
+                    <i class="fas fa-medal mr-3 text-ds-accent"></i> 검증된 기술력과 주요 고객사 레퍼런스
                 </h3>
                 <p class="text-lg font-medium text-gray-700 mb-6">
                     **국민연금, 한국거래소 및 다수의 대형 금융 기관**에서 기술력을 인정 받은 Enterprise AI 분야의 대표 기업 입니다. 
                 </p>
                 <img src="레퍼런스.png" 
                      alt="주요 고객사 레퍼런스 로고" 
-                     class="mx-auto w-full h-auto mt-6 border border-gray-200 p-4 rounded-lg"/> 
+                     class="mx-auto w-full h-auto mt-6 border border-gray-300 p-4 rounded-lg shadow-inner"/> 
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-ds-blue text-white py-12">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <h3 class="text-3xl font-bold mb-4">도입 및 기술 제휴 문의</h3>
+    <!-- Footer / Contact Section (Dark background, clear contrast) -->
+    <footer class="bg-ds-secondary text-white py-12">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h3 class="text-3xl font-bold mb-4 border-b border-gray-600 pb-2">도입 및 기술 제휴 문의</h3>
             <p class="text-lg mb-6 opacity-90">
                 구체적인 **데모 및 개념 증명(PoC)**를 위해 언제든지 편하게 연락 부탁드립니다.
             </p>
@@ -319,9 +315,10 @@
                 <p><i class="fas fa-globe mr-2 text-ds-accent"></i> 홈페이지: <a href="https://finorma.deepsearch.com/" target="_blank" class="text-ds-accent hover:underline">https://finorma.deepsearch.com/</a></p>
                 <p><i class="fas fa-envelope mr-2 text-ds-accent"></i> Contact: <a href="mailto:contact@deepsearch.com" class="text-ds-accent hover:underline">contact@deepsearch.com</a></p>
             </div>
-            <p class="mt-10 text-sm opacity-60">&copy; 2025 DeepSearch AI Platform. All rights reserved.</p>
+            <p class="mt-10 text-sm opacity-50">&copy; 2025 DeepSearch AI Platform. All rights reserved.</p>
         </div>
     </footer>
 
 </body>
 </html>
+
