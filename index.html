@@ -1,301 +1,335 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>딥서치 AI 플랫폼 제안서 - 글로벌 리서치</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>DeepSearch Finorma - Corporate/Financial Data API for LLMs</title>
     <style>
-        /* Custom Font for Korean readability */
+        :root {
+            --primary-color: #003366; /* Deep Blue */
+            --secondary-color: #007bff; /* Bright Blue */
+            --light-bg: #f8f9fa;
+            --text-color: #333;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
         body {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
             line-height: 1.6;
+            color: var(--text-color);
+            background-color: white;
         }
-        /* Custom Scrollbar for aesthetics */
-        body::-webkit-scrollbar {
-            width: 8px;
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 5px solid var(--secondary-color);
         }
-        body::-webkit-scrollbar-thumb {
-            background-color: #f97316; /* Orange accent */
-            border-radius: 4px;
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
         }
-        body::-webkit-scrollbar-track {
-            background-color: #f1f5f9;
+
+        header p {
+            margin-top: 5px;
+            font-size: 1.2em;
         }
-        /* Style for Business Model SVG Icons */
-        .model-svg-icon {
-            width: 55px; /* Slightly smaller for refinement */
-            height: 55px;
-            color: #1e3a8a; /* Deep Blue */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
-        /* Style for panels to look like research sections */
-        .research-panel {
-            border: 1px solid #e5e7eb;
-            background-color: #ffffff;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-            padding: 2.5rem;
-            border-radius: 0.5rem;
+
+        section {
+            padding: 40px 0;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #ddd;
         }
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'ds-primary': '#1e3a8a', /* Deep Blue for Trust */
-                        'ds-secondary': '#3b82f6', /* Classic Blue */
-                        'ds-accent': '#f97316', /* Vibrant Orange/Amber for Highlight */
-                        'ds-warning': '#dc2626', /* Strong Red for Risk */
-                        'ds-background': '#f8fafc', /* Light Background */
-                        'ds-card': '#ffffff',
-                        'ds-gold': '#fbbf24', /* Gold accent for premium */
-                    }
-                }
+        
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 10px;
+            margin-top: 30px;
+        }
+
+        /* --- API Introduction Section --- */
+        .pitch {
+            text-align: center;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+        }
+
+        .features-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            flex: 1 1 30%; /* Allows 3 cards per row on large screens */
+            min-width: 280px;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            font-size: 1.3em;
+            margin-top: 0;
+        }
+
+        /* --- Solutions Section --- */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .solution-card {
+            background-color: var(--light-bg);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .solution-card h4 {
+            color: var(--primary-color);
+            font-size: 1.2em;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .solution-card .example {
+            font-style: italic;
+            color: #666;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* --- Data & Tech Lists --- */
+        .list-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .data-list, .tech-list {
+            flex: 1 1 45%;
+            min-width: 300px;
+        }
+
+        .data-list ul, .tech-list ul {
+            list-style: none;
+            padding: 0;
+            columns: 2; /* Two columns for list items */
+        }
+
+        .data-list li, .tech-list li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .data-list li::before, .tech-list li::before {
+            content: '•';
+            color: var(--secondary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            position: absolute;
+            left: 0;
+        }
+
+        /* --- Footer/Client Section --- */
+        .clients {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0;
+        }
+
+        .clients h2 {
+            color: white;
+        }
+
+        .client-logos {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        
+        /* Media Queries for smaller screens */
+        @media (max-width: 768px) {
+            .features-grid, .list-container {
+                flex-direction: column;
+            }
+            .data-list ul, .tech-list ul {
+                columns: 1;
             }
         }
-    </script>
+    </style>
 </head>
-<body class="bg-ds-background text-gray-800">
+<body>
 
-    <header class="bg-ds-primary text-white py-16 shadow-xl border-b-4 border-ds-gold">
-        <div class="max-w-6xl mx-auto px-6">
-            <h1 class="text-6xl font-black mb-2 tracking-wide">DEEPSEARCH AI PLATFORM</h1>
-            <p class="text-xl font-light opacity-90 border-l-2 border-ds-accent pl-4 inline-block">
-                **고가치 데이터**와 **지능형 AI 엔진**의 결합, 미래 금융을 위한 전략적 인프라
-            </p>
-        </div>
+    <header>
+        <h1>DeepSearch Finorma</h1>
+        <p>Make your LLM into Financial Experts</p>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 py-20">
+    <main class="container">
 
-        <section id="issues" class="mb-24">
-            <h2 class="text-4xl font-extrabold text-ds-primary mb-12 border-b-4 border-ds-accent pb-3">
-                <i class="fas fa-hand-point-right mr-3 text-ds-accent"></i> 현황 분석 및 혁신 장애 요소
-            </h2>
+        <section id="api-overview">
+            <h2>Corporate/Financial Data API for LLMs</h2>
+            <div class="pitch">
+                "DeepSearch Finorma provides everything from **real-time news and public disclosures** to **brokerage reports, IR materials, patents, and vast corporate/financial data**. We support the development of more accurate and powerful financial AI applications by providing this data in a format **instantly usable by LLMs**."
+            </div>
+            
+            <h3>Key Benefits</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>1. Easy LLM Integration</h4>
+                    <p>Provides data optimized for LLM utilization, allowing easy integration with various LLM applications such as RAG and Few-shot learning.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>2. Accurate and Highly Reliable Data</h4>
+                    <p>Provides verified, high-quality data to properly train LLMs and enhance the reliability of the analysis environment.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>3. Real-time Data, Easy Acquisition</h4>
+                    <p>Instantly secure essential corporate/financial data through the Finorma API without complex collection/refinement processes.</p>
+                </div>
+            </div>
+        </section>
 
-            <div class="grid lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-1 research-panel border-l-8 border-ds-secondary">
-                    <h3 class="text-2xl font-extrabold text-ds-primary mb-5 flex items-center">
-                        <i class="fas fa-history mr-3 text-ds-secondary"></i> 시간/인력 의존성
-                    </h3>
-                    <ul class="list-disc list-inside ml-4 space-y-3 text-gray-700 text-base">
-                        <li>수동적 데이터 처리로 **운영 비용** 및 **시간** 초과 발생</li>
-                        <li>시장 변화와 리스크에 대한 **신속한 대응 시스템 부재**</li>
+        <section id="data-tech">
+            <h2>API Data Coverage & Core Technologies</h2>
+            <div class="list-container">
+                
+                <div class="data-list">
+                    <h3>DeepSearch Finorma API Data Categories</h3>
+                    <ul>
+                        <li>Korean Listed Companies</li>
+                        <li>Korean Unlisted Companies</li>
+                        <li>US Listed Companies</li>
+                        <li>ETF</li>
+                        <li>Domestic/International News</li>
+                        <li>Public Disclosure</li>
+                        <li>Foreign Disclosure (Korean)</li>
+                        <li>Foreign Disclosure</li>
+                        <li>Foreign Analyst</li>
+                        <li>Patents</li>
+                        <li>Brokerage Reports</li>
+                        <li>IR Materials</li>
+                        <li>Research Analyst</li>
+                        <li>Risk Monitoring</li>
+                        <li>Virtual Assets (Cryptocurrencies)</li>
+                        <li>Daily Briefing</li>
                     </ul>
                 </div>
-                <div class="lg:col-span-1 research-panel border-l-8 border-ds-secondary">
-                    <h3 class="text-2xl font-extrabold text-ds-primary mb-5 flex items-center">
-                        <i class="fas fa-database mr-3 text-ds-secondary"></i> 파편화된 데이터 문제
-                    </h3>
-                    <ul class="list-disc list-inside ml-4 space-y-3 text-gray-700 text-base">
-                        <li>미정제된 데이터가 **AI 모델 학습의 품질** 저하 유발</li>
-                        <li>내/외부 데이터 간 **연결 부재**로 심층 인사이트 도출 불가</li>
-                    </ul>
-                </div>
-                <div class="lg:col-span-1 research-panel border-l-8 border-ds-secondary">
-                    <h3 class="text-2xl font-extrabold text-ds-primary mb-5 flex items-center">
-                        <i class="fas fa-money-bill-trend-up mr-3 text-ds-accent"></i> 높은 도입 장벽
-                    </h3>
-                    <ul class="list-disc list-inside ml-4 space-y-3 text-gray-700 text-base">
-                        <li>AI 인프라 및 보안 시스템 구축의 **막대한 초기 투자** 필요</li>
-                        <li>비정형 데이터 처리 및 모델 관리를 위한 **전문 인력 확보 경쟁** 심화</li>
+
+                <div class="tech-list">
+                    <h3>Finorma API Core Technologies (Design for Developers)</h3>
+                    <ul>
+                        <li>**LLM-Optimized Response:** Maximizes LLM processing efficiency and minimizes parsing errors with RAG-ready format.</li>
+                        <li>**Developer-Friendly Design:** Supports fast, easy integration with REST API, detailed documentation, and rich examples.</li>
+                        <li>**Easy Function Calling:** Supports direct and accurate data calls by LLM agents to automate workflows.</li>
+                        <li>**Reliability and Performance:** Scalability-based system with load balancing for high availability and fast response times.</li>
                     </ul>
                 </div>
             </div>
-            
-            <blockquote class="mt-12 p-6 border-l-4 border-ds-accent bg-gray-50 text-gray-800 font-semibold italic shadow-inner">
-                결론: 딥서치 AI 플랫폼은 고품질 데이터와 통합 엔진을 제공하여, 기존 시스템의 한계를 극복하고 **TCO(총소유비용)를 혁신**합니다.
-            </blockquote>
+        </section>
+
+        <section id="clients" class="clients">
+            <div class="container">
+                <h2>Data Intelligence Trusted by Industry Leaders</h2>
+                <p style="text-align: center; margin-bottom: 20px;">Finorma is trusted and utilized by numerous financial experts and institutions.</p>
+                <div class="client-logos">
+                    <span style="display: inline-block; margin: 0 15px;">NPS</span> 
+                    <span style="display: inline-block; margin: 0 15px;">KRX (Korea Exchange)</span> 
+                    <span style="display: inline-block; margin: 0 15px;">NEXTRADE</span> 
+                    <span style="display: inline-block; margin: 0 15px;">KB Kookmin Bank</span> 
+                    <span style="display: inline-block; margin: 0 15px;">Samsung Securities</span> 
+                    <span style="display: inline-block; margin: 0 15px;">Shinhan Bank</span> 
+                    <span style="display: inline-block; margin: 0 15px;">NH Investment & Securities</span> 
+                    <span style="display: inline-block; margin: 0 15px;">LS Securities</span>
+                    <span style="display: inline-block; margin: 0 15px;">SK</span>
+                    </div>
+            </div>
+        </section>
+
+        <section id="solutions">
+            <h2>Innovative Financial AI Solutions Implemented with the Finorma API</h2>
+            <div class="solutions-grid">
+                
+                <div class="solution-card">
+                    <h4>Direct Indexing Service</h4>
+                    <p>Provides detailed data to support personalized index construction and investment services.</p>
+                    <span class="example">Example: (Samsung Securities, etc.)</span>
+                </div>
+                <div class="solution-card">
+                    <h4>AI Analyst</h4>
+                    <p>Supports investment analysis and decision-making through real-time data analysis/summarization based on LLMs.</p>
+                    <span class="example">Example: (National Pension Service, Korea Securities Finance Corporation, etc.)</span>
+                </div>
+                <div class="solution-card">
+                    <h4>AI PB (Private Banker)</h4>
+                    <p>Provides customized investment advice and portfolio management based on client and market data.</p>
+                    <span class="example">Example: (Hyundai Securities, LS Securities, etc.)</span>
+                </div>
+                <div class="solution-card">
+                    <h4>AI Risk Management System</h4>
+                    <p>Identifies potential risks and detects abnormal signals through real-time data analysis.</p>
+                    <span class="example">Example: (NEXTRADE, Korea Exchange, etc.)</span>
+                </div>
+                <div class="solution-card">
+                    <h4>Investment Information Service</h4>
+                    <p>Supports the development of various services, including web/app-based investment information, analysis, and recommendations.</p>
+                    <span class="example">Example: (Kbank, Zoom Internet, etc.)</span>
+                </div>
+                <div class="solution-card">
+                    <h4>AI Research Report</h4>
+                    <p>Automates in-depth research on industries, companies, and themes. Derives insights through comprehensive analysis.</p>
+                    <span class="example">Example: (Korea Investment & Securities, etc.)</span>
+                </div>
+
+            </div>
         </section>
         
-        <section id="solution" class="mb-24">
-            <h2 class="text-4xl font-extrabold text-ds-primary mb-12 border-b-4 border-ds-accent pb-3">
-                <i class="fas fa-lightbulb mr-3 text-ds-accent"></i> 딥서치 AI 플랫폼: 통합적 가치 제안
-            </h2>
-            <p class="text-xl font-semibold text-ds-secondary mb-10 border-l-4 border-ds-accent pl-4">
-                선행 투자 없이, **즉시 활용 가능한 금융 AI 엔진과 인프라**로 고객사의 경쟁력을 극대화합니다.
-            </p>
-
-            <div class="mb-16 p-8 research-panel border-l-8 border-ds-primary">
-                <div class="text-center w-full">
-                    <p class="text-lg font-semibold text-ds-primary mb-3">DeepSearch Data Infra & AI Engine Configuration</p>
-                    <img src="데이터엔진.png" 
-                         alt="딥서치 데이터 인프라 및 AI 엔진 구성도" 
-                         class="mx-auto w-full h-auto border-4 border-gray-300 rounded-lg shadow-md"/>
-                </div>
-            </div>
-
-            <div class="research-panel mb-12 border-l-8 border-ds-accent">
-                <h3 class="text-2xl font-extrabold text-ds-primary mb-8 flex items-center">
-                    <i class="fas fa-table mr-3 text-ds-accent"></i> AI 학습에 최적화된 고품질 데이터셋
-                </h3>
-                
-                <div class="overflow-x-auto mb-10">
-                    <table class="min-w-full divide-y divide-gray-300 border border-gray-300">
-                        <thead class="bg-ds-primary text-white">
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-extrabold uppercase tracking-wider">구분</th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-extrabold uppercase tracking-wider">주요 항목</th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-extrabold uppercase tracking-wider">데이터 규모/기간</th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-extrabold uppercase tracking-wider">활용 가치</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-ds-card divide-y divide-gray-200">
-                            <tr>
-                                <td class="px-6 py-4 whitespace-normal font-bold text-ds-primary">기업 데이터</td>
-                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">개요, 현황, 상세 재무, 주주, 신용, 컨센서스 등</td>
-                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">10년 이상, 국내 상장/비상장, 미국 상장, 경쟁사 </td>
-                                <td class="px-6 py-4 whitespace-normal text-ds-gold font-semibold">정밀한 기업 가치 분석 자동화</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-normal font-bold text-ds-primary">시장 데이터</td>
-                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">주가, 배당, 수익률, 거래관련, 투자지표 (PER, EPS 등)</td>
-                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">KOSPI/KOSDAQ/KONEX 전종목</td>
-                                <td class="px-6 py-4 whitespace-normal text-ds-gold font-semibold">실시간 투자 전략 및 알고리즘 수립</td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-normal font-bold text-ds-primary">비정형 문서</td>
-                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">뉴스, 공시, 증권사 리포트, IR, 어닝콜, 특허, ETF</td>
-                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-700">국내 뉴스 1990년~, 공시 1999년~, IR 2014년~,<br>증권사리포트 2005년~, 특허 1948년~</td>
-                                <td class="px-6 py-4 whitespace-normal text-ds-gold font-semibold">AI 학습 기반 리스크 및 트렌드 모니터링</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="mt-10 p-6 bg-ds-primary/5 rounded-xl border border-ds-primary/20 text-gray-800">
-                    <h4 class="text-xl font-bold mb-3 flex items-center text-ds-primary"><i class="fas fa-check-circle mr-2 text-ds-accent"></i> ROI 극대화 전략</h4>
-                    <p class="text-sm font-normal">
-                        AI 학습 인프라 구축 및 데이터 정제 전문 인력 고용 없이 **즉시 AI 학습 데이터 사용 가능**.
-                    </p>
-                    <div class="mt-4 p-3 bg-ds-accent/10 border border-ds-accent text-ds-primary font-semibold text-sm rounded-lg">
-                         → 데이터 처리/정제 비용 **100% 절감**, 전문 인력 비용 **80% 이상 절감** 효과.
-                    </div>
-                </div>
-            </div>
-            
-            <blockquote class="mt-12 p-6 border-l-4 border-ds-accent bg-ds-card shadow-lg text-gray-800 font-semibold italic">
-                딥서치 AI 엔진은 파편화된 데이터를 지능적으로 연결(RAG)하고 시너지를 극대화하여, **신속한 의사결정**과 **혁신적인 서비스** 창출을 지원합니다.
-            </blockquote>
-        </section>
-
-        <section id="use-cases" class="mb-24">
-            <h2 class="text-4xl font-extrabold text-ds-primary mb-12 border-b-4 border-ds-accent pb-3">
-                <i class="fas fa-cogs mr-3 text-ds-accent"></i> 🛠️ 핵심 활용 사례: AI 기반 자동화 서비스
-            </h2>
-            <p class="text-lg font-medium text-gray-700 mb-10">데이터 연결을 통해 고객 경험을 혁신하고 내부 프로세스를 자동화합니다.</p>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="p-6 research-panel border-l-4 border-ds-secondary hover:shadow-xl transition duration-300">
-                    <i class="fas fa-file-invoice text-4xl text-ds-secondary mb-3"></i>
-                    <h3 class="font-bold text-xl text-ds-primary mb-2">AI 자동화 보고서 생성 </h3>
-                    <p class="text-sm text-gray-600">연결 데이터를 기반으로 **AI 애널리스트 보고서**를 자동 생성하여 업무 효율성을 극대화합니다.</p>
-                </div>
-                <div class="p-6 research-panel border-l-4 border-ds-secondary hover:shadow-xl transition duration-300">
-                    <i class="fas fa-calendar-day text-4xl text-ds-secondary mb-3"></i>
-                    <h3 class="font-bold text-xl text-ds-primary mb-2">데일리 브리핑 및 개인화</h3>
-                    <p class="text-sm text-gray-600">포트폴리오 기반 맞춤 브리핑 및 주식/ETF 등락 이유 분석 후 **고객 맞춤 알림**과 연계합니다.</p>
-                </div>
-                <div class="p-6 research-panel border-l-4 border-ds-warning hover:shadow-xl transition duration-300">
-                    <i class="fas fa-shield-alt text-4xl text-ds-warning mb-3"></i>
-                    <h3 class="font-bold text-xl text-ds-warning mb-2">실시간 리스크 모니터링 </h3>
-                    <p class="text-sm text-gray-600">
-                        AI가 **내부 가이드라인**을 학습하여 이상 징후를 **조기에 경보**하고, 리스크 요인 판단을 자동화합니다.
-                    </p>
-                </div>
-                <div class="p-6 research-panel border-l-4 border-ds-primary col-span-full">
-                    <i class="fas fa-brain text-4xl text-ds-primary mb-3"></i>
-                    <h3 class="font-bold text-xl text-ds-primary mb-2">내부 지식 인프라 고도화 (RAG) </h3>
-                    <p class="text-sm text-gray-600">
-                        내부 문서, 리포트 등을 통합하고 **질의/응답이 가능한 지식 인프라**를 구축하여 내부 업무 효율성을 높입니다.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="business-model" class="mb-24">
-            <h2 class="text-4xl font-extrabold text-ds-primary mb-12 border-b-4 border-ds-accent pb-3">
-                <i class="fas fa-sitemap mr-3 text-ds-accent"></i> 📊 딥서치 비즈니스 모델 및 성장 축
-            </h2>
-            
-            <p class="text-lg font-medium text-gray-700 mb-10">AI 플랫폼을 기반으로 금융 시장의 핵심 가치 창출 영역을 지원합니다.</p>
-
-            <div class="grid md:grid-cols-4 gap-8 text-center">
-                <div class="p-8 research-panel border-t-4 border-ds-accent hover:shadow-2xl transition duration-300">
-                    <svg class="model-svg-icon mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M11 19c6.075 0 11-4.925 11-11S17.075-3 11-3 0 1.925 0 8s4.925 11 11 11zM21 21l-4.35-4.35M7 3h10v10H7z"/>
-                        <path d="M7 3h10v10H7z" />
-                        <path d="M7 7h10" />
-                        <path d="M7 11h10" />
-                    </svg>
-                    <h3 class="text-xl font-bold text-ds-primary mb-2">정보</h3>
-                    <p class="text-sm text-gray-600">기업/주식/ETF 데이터 서비스</p>
-                    <span class="block font-bold text-ds-accent mt-3 text-sm">-> AI 애널리스트</span>
-                </div>
-                <div class="p-8 research-panel border-t-4 border-ds-accent hover:shadow-2xl transition duration-300">
-                    <svg class="model-svg-icon mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 3h.01"></path>
-                        <path d="M16.5 7.5L12 12 7.5 7.5"></path>
-                        <path d="M12 12L12 21"></path>
-                        <path d="M3 16.5h18"></path>
-                        <path d="M3 16.5c-2.2 0-3 1.5-3 1.5s.8 1.5 3 1.5h18c2.2 0 3-1.5 3-1.5s-.8-1.5-3-1.5h-18z"></path>
-                    </svg>
-                    <h3 class="text-xl font-bold text-ds-primary mb-2">평가</h3>
-                    <p class="text-sm text-gray-600">기업 가치 및 금융 상품 평가</p>
-                    <span class="block font-bold text-ds-accent mt-3 text-sm">-> AI 평가전문가</span>
-                </div>
-                <div class="p-8 research-panel border-t-4 border-ds-accent hover:shadow-2xl transition duration-300">
-                    <svg class="model-svg-icon mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M17 19H7c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2z"></path>
-                        <path d="M17 19L21 21M7 5L3 3"></path>
-                        <path d="M12 12l2 2-2 2-2-2 2-2z"></path>
-                        <path d="M17 7h-2c-1.1 0-2 .9-2 2v2"></path>
-                        <path d="M7 17h2c1.1 0 2-.9 2-2v-2"></path>
-                    </svg>
-                    <h3 class="text-xl font-bold text-ds-primary mb-2">중개</h3>
-                    <p class="text-sm text-gray-600">기업 중개 플랫폼 (M&A, 실사/평가)</p>
-                    <span class="block font-bold text-ds-accent mt-3 text-sm">-> AI M&A 전문가</span>
-                </div>
-                <div class="p-8 research-panel border-t-4 border-ds-accent hover:shadow-2xl transition duration-300">
-                    <svg class="model-svg-icon mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 3v18h18M18.73 10.73L12 18 7 13 3 17"></path>
-                        <path d="M18.73 10.73V18h-7.27"></path>
-                    </svg>
-                    <h3 class="text-xl font-bold text-ds-primary mb-2">운용</h3>
-                    <p class="text-sm text-gray-600">금융 상품 운용 및 인덱싱</p>
-                    <span class="block font-bold text-ds-accent mt-3 text-sm">-> AI 투자 전문가</span>
-                </div>
-            </div>
-            
-            <div class="mt-16 p-10 research-panel border-l-8 border-ds-gold">
-                <h3 class="text-2xl font-extrabold text-ds-primary mb-4 flex items-center">
-                    <i class="fas fa-medal mr-3 text-ds-gold"></i> 검증된 기술력과 주요 고객사 레퍼런스
-                </h3>
-                <p class="text-lg font-medium text-gray-700 mb-6">
-                    **국민연금, 한국거래소 및 다수의 대형 금융 기관**에서 기술력을 인정 받은 Enterprise AI 분야의 대표 기업 입니다. 
-                </p>
-                <img src="레퍼런스.png" 
-                     alt="주요 고객사 레퍼런스 로고" 
-                     class="mx-auto w-full h-auto mt-6 border border-gray-300 p-4 rounded-lg shadow-inner"/> 
-            </div>
-        </section>
-
     </main>
 
-    <footer class="bg-ds-primary text-white py-12">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <h3 class="text-3xl font-extrabold mb-4 border-b border-blue-800 pb-2">도입 및 파트너십 문의</h3>
-            <p class="text-lg mb-6 opacity-90">
-                구체적인 **데모 및 개념 증명(PoC)**를 위해 언제든지 편하게 연락 부탁드립니다.
-            </p>
-            <div class="space-y-2 font-medium">
-                <p><i class="fas fa-globe mr-2 text-ds-accent"></i> 홈페이지: <a href="https://finorma.deepsearch.com/" target="_blank" class="text-ds-accent hover:underline">https://finorma.deepsearch.com/</a></p>
-                <p><i class="fas fa-envelope mr-2 text-ds-accent"></i> Contact: <a href="mailto:contact@deepsearch.com" class="text-ds-accent hover:underline">contact@deepsearch.com</a></p>
-            </div>
-            <p class="mt-10 text-sm opacity-60">&copy; 2025 DeepSearch AI Platform. All rights reserved.</p>
-        </div>
+    <footer style="text-align: center; padding: 20px; background-color: #eee; color: #666;">
+        <p>&copy; 2025 DeepSearch Finorma. All rights reserved.</p>
     </footer>
 
 </body>
