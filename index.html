@@ -1,335 +1,518 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepSearch Finorma - Corporate/Financial Data API for LLMs</title>
+    <title>DeepSearch AI Platform Proposal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #003366; /* Deep Blue */
-            --secondary-color: #007bff; /* Bright Blue */
-            --light-bg: #f8f9fa;
-            --text-color: #333;
-            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
+        /* Custom Font for Korean readability (Kept for reference if original font is needed) */
         body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: white;
+            font-family: 'Noto Sans KR', sans-serif;
         }
-
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            border-bottom: 5px solid var(--secondary-color);
+        /* Custom Scrollbar for aesthetics */
+        body::-webkit-scrollbar {
+            width: 8px;
         }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
+        body::-webkit-scrollbar-thumb {
+            background-color: #60a5fa;
+            border-radius: 4px;
         }
-
-        header p {
-            margin-top: 5px;
-            font-size: 1.2em;
+        body::-webkit-scrollbar-track {
+            background-color: #f1f5f9;
         }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        section {
-            padding: 40px 0;
-            margin-bottom: 40px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        section:last-child {
-            border-bottom: none;
-        }
-
-        h2 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2em;
-        }
-
-        h3 {
-            color: var(--secondary-color);
-            border-left: 4px solid var(--secondary-color);
-            padding-left: 10px;
-            margin-top: 30px;
-        }
-
-        /* --- API Introduction Section --- */
-        .pitch {
-            text-align: center;
-            font-size: 1.1em;
-            margin-bottom: 40px;
-            padding: 20px;
-            background-color: var(--light-bg);
-            border-radius: 8px;
-        }
-
-        .features-grid {
+        /* Chart Placeholder Style */
+        .chart-placeholder {
+            height: 150px;
+            background-color: #e0f2f1;
+            border: 1px dashed #4db6ac;
             display: flex;
-            gap: 20px;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: var(--card-shadow);
-            flex: 1 1 30%; /* Allows 3 cards per row on large screens */
-            min-width: 280px;
-            transition: transform 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-card h4 {
-            color: var(--primary-color);
-            font-size: 1.3em;
-            margin-top: 0;
-        }
-
-        /* --- Solutions Section --- */
-        .solutions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .solution-card {
-            background-color: var(--light-bg);
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .solution-card h4 {
-            color: var(--primary-color);
-            font-size: 1.2em;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-
-        .solution-card .example {
-            font-style: italic;
-            color: #666;
-            display: block;
-            margin-top: 10px;
-        }
-
-        /* --- Data & Tech Lists --- */
-        .list-container {
-            display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
+            align-items: center;
             justify-content: center;
+            color: #00796b;
+            font-weight: 700;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 14px;
         }
-
-        .data-list, .tech-list {
-            flex: 1 1 45%;
-            min-width: 300px;
-        }
-
-        .data-list ul, .tech-list ul {
-            list-style: none;
-            padding: 0;
-            columns: 2; /* Two columns for list items */
-        }
-
-        .data-list li, .tech-list li {
-            padding: 5px 0;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .data-list li::before, .tech-list li::before {
-            content: '•';
-            color: var(--secondary-color);
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-            position: absolute;
-            left: 0;
-        }
-
-        /* --- Footer/Client Section --- */
-        .clients {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 40px 0;
-        }
-
-        .clients h2 {
-            color: white;
-        }
-
-        .client-logos {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1.1em;
-        }
-        
-        /* Media Queries for smaller screens */
-        @media (max-width: 768px) {
-            .features-grid, .list-container {
-                flex-direction: column;
-            }
-            .data-list ul, .tech-list ul {
-                columns: 1;
-            }
+        /* 🎨 SVG 아이콘 크기 및 색상 정의 (크기 조절 핵심 위치) */
+        .model-svg-icon {
+            width: 45px; /* Width setting */
+            height: 45px; /* Height setting */
+            color: #10b981; /* ds-accent color */
         }
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ds-blue': '#1a237e',
+                        'ds-light-blue': '#3b82f6',
+                        'ds-accent': '#10b981',
+                        'ds-bg': '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+<body class="bg-ds-bg text-gray-800">
 
-    <header>
-        <h1>DeepSearch Finorma</h1>
-        <p>Make your LLM into Financial Experts</p>
+    <header class="bg-ds-blue text-white py-12 shadow-2xl">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-5xl font-extrabold mb-3">DeepSearch AI Platform Proposal</h1>
+            <p class="text-xl font-light max-w-2xl mx-auto">
+                A comprehensive AI solution that goes beyond data provision to support <b>connection, analysis, and utilization</b>.
+            </p>
+        </div>
     </header>
 
-    <main class="container">
+    <main class="max-w-6xl mx-auto px-4 py-16">
 
-        <section id="api-overview">
-            <h2>Corporate/Financial Data API for LLMs</h2>
-            <div class="pitch">
-                "DeepSearch Finorma provides everything from **real-time news and public disclosures** to **brokerage reports, IR materials, patents, and vast corporate/financial data**. We support the development of more accurate and powerful financial AI applications by providing this data in a format **instantly usable by LLMs**."
-            </div>
-            
-            <h3>Key Benefits</h3>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h4>1. Easy LLM Integration</h4>
-                    <p>Provides data optimized for LLM utilization, allowing easy integration with various LLM applications such as RAG and Few-shot learning.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>2. Accurate and Highly Reliable Data</h4>
-                    <p>Provides verified, high-quality data to properly train LLMs and enhance the reliability of the analysis environment.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>3. Real-time Data, Easy Acquisition</h4>
-                    <p>Instantly secure essential corporate/financial data through the Finorma API without complex collection/refinement processes.</p>
-                </div>
-            </div>
-        </section>
+        <section id="issues" class="mb-20">
+            <h2 class="text-3xl font-bold text-ds-light-blue mb-10 border-b-4 border-ds-light-blue pb-2 flex items-center">
+                <i class="fas fa-bullseye-arrow mr-3"></i> What are the issues with existing services and the difficulties in advancing with AI?
+            </h2>
 
-        <section id="data-tech">
-            <h2>API Data Coverage & Core Technologies</h2>
-            <div class="list-container">
-                
-                <div class="data-list">
-                    <h3>DeepSearch Finorma API Data Categories</h3>
-                    <ul>
-                        <li>Korean Listed Companies</li>
-                        <li>Korean Unlisted Companies</li>
-                        <li>US Listed Companies</li>
-                        <li>ETF</li>
-                        <li>Domestic/International News</li>
-                        <li>Public Disclosure</li>
-                        <li>Foreign Disclosure (Korean)</li>
-                        <li>Foreign Disclosure</li>
-                        <li>Foreign Analyst</li>
-                        <li>Patents</li>
-                        <li>Brokerage Reports</li>
-                        <li>IR Materials</li>
-                        <li>Research Analyst</li>
-                        <li>Risk Monitoring</li>
-                        <li>Virtual Assets (Cryptocurrencies)</li>
-                        <li>Daily Briefing</li>
-                    </ul>
-                </div>
-
-                <div class="tech-list">
-                    <h3>Finorma API Core Technologies (Design for Developers)</h3>
-                    <ul>
-                        <li>**LLM-Optimized Response:** Maximizes LLM processing efficiency and minimizes parsing errors with RAG-ready format.</li>
-                        <li>**Developer-Friendly Design:** Supports fast, easy integration with REST API, detailed documentation, and rich examples.</li>
-                        <li>**Easy Function Calling:** Supports direct and accurate data calls by LLM agents to automate workflows.</li>
-                        <li>**Reliability and Performance:** Scalability-based system with load balancing for high availability and fast response times.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="clients" class="clients">
-            <div class="container">
-                <h2>Data Intelligence Trusted by Industry Leaders</h2>
-                <p style="text-align: center; margin-bottom: 20px;">Finorma is trusted and utilized by numerous financial experts and institutions.</p>
-                <div class="client-logos">
-                    <span style="display: inline-block; margin: 0 15px;">NPS</span> 
-                    <span style="display: inline-block; margin: 0 15px;">KRX (Korea Exchange)</span> 
-                    <span style="display: inline-block; margin: 0 15px;">NEXTRADE</span> 
-                    <span style="display: inline-block; margin: 0 15px;">KB Kookmin Bank</span> 
-                    <span style="display: inline-block; margin: 0 15px;">Samsung Securities</span> 
-                    <span style="display: inline-block; margin: 0 15px;">Shinhan Bank</span> 
-                    <span style="display: inline-block; margin: 0 15px;">NH Investment & Securities</span> 
-                    <span style="display: inline-block; margin: 0 15px;">LS Securities</span>
-                    <span style="display: inline-block; margin: 0 15px;">SK</span>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 bg-white rounded-xl shadow-lg border-t-4 border-red-500">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4 flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-3"></i> Why are existing services inefficient?
+                    </h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-700 mb-2">Limitation of Real-time Analysis</h4>
+                            <ul class="list-disc list-inside ml-4 text-gray-600 space-y-1">
+                                <li>Limited ability to support <b>real-time data collection, analysis</b> and <b>rapid decision-making</b> regarding market changes.</li>
+                                <li>Difficulty in rapidly launching financial products or immediately responding to risks.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-700 mb-2">High Human Dependency</h4>
+                            <ul class="list-disc list-inside ml-4 text-gray-600 space-y-1">
+                                <li>Many tasks like data collection, analysis, and risk management rely on human effort, leading to a <b>manual process</b> that consumes significant time and cost.</li>
+                                <li>Customer response tasks that require 24/7 processing result in long waiting times.</li>
+                            </ul>
+                        </div>
                     </div>
-            </div>
-        </section>
-
-        <section id="solutions">
-            <h2>Innovative Financial AI Solutions Implemented with the Finorma API</h2>
-            <div class="solutions-grid">
-                
-                <div class="solution-card">
-                    <h4>Direct Indexing Service</h4>
-                    <p>Provides detailed data to support personalized index construction and investment services.</p>
-                    <span class="example">Example: (Samsung Securities, etc.)</span>
-                </div>
-                <div class="solution-card">
-                    <h4>AI Analyst</h4>
-                    <p>Supports investment analysis and decision-making through real-time data analysis/summarization based on LLMs.</p>
-                    <span class="example">Example: (National Pension Service, Korea Securities Finance Corporation, etc.)</span>
-                </div>
-                <div class="solution-card">
-                    <h4>AI PB (Private Banker)</h4>
-                    <p>Provides customized investment advice and portfolio management based on client and market data.</p>
-                    <span class="example">Example: (Hyundai Securities, LS Securities, etc.)</span>
-                </div>
-                <div class="solution-card">
-                    <h4>AI Risk Management System</h4>
-                    <p>Identifies potential risks and detects abnormal signals through real-time data analysis.</p>
-                    <span class="example">Example: (NEXTRADE, Korea Exchange, etc.)</span>
-                </div>
-                <div class="solution-card">
-                    <h4>Investment Information Service</h4>
-                    <p>Supports the development of various services, including web/app-based investment information, analysis, and recommendations.</p>
-                    <span class="example">Example: (Kbank, Zoom Internet, etc.)</span>
-                </div>
-                <div class="solution-card">
-                    <h4>AI Research Report</h4>
-                    <p>Automates in-depth research on industries, companies, and themes. Derives insights through comprehensive analysis.</p>
-                    <span class="example">Example: (Korea Investment & Securities, etc.)</span>
                 </div>
 
+                <div class="p-6 bg-white rounded-xl shadow-lg border-t-4 border-yellow-500">
+                    <h3 class="text-2xl font-bold text-yellow-600 mb-4 flex items-center">
+                        <i class="fas fa-robot mr-3"></i> Why is the AI service advancement process difficult?
+                    </h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-700 mb-2">Limitations in Securing AI Training Data and Data Connection</h4>
+                            <ul class="list-disc list-inside ml-4 text-gray-600 space-y-1">
+                                <li>Existing data is often fragmented and unrefined, making it unsuitable for AI training.</li>
+                                <li>Limitations exist in connecting and utilizing massive data for generating meaningful <b>insights</b>, restricting the provision of customized services.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-700 mb-2">High Setup and Hiring Costs</h4>
+                            <ul class="list-disc list-inside ml-4 text-gray-600 space-y-1">
+                                <li>Server costs for establishing the AI training and development environment, and security system setup costs are incurred.</li>
+                                <li>High costs for processing and refining vast/unstructured data for AI training, and professional personnel hiring costs are incurred.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <p class="mt-8 text-lg font-medium text-gray-700" font-bold>Conclusion: Inefficiency in rapid decision-making or real-time service provision, difficulty in deriving meaningful insights through data connection, and high setup costs are incurred.</p>
         </section>
         
+        <section id="solution" class="mb-20">
+            <h2 class="text-3xl font-bold text-ds-accent mb-10 border-b-4 border-ds-accent pb-2 flex items-center">
+                <i class="fas fa-lightbulb-on mr-3"></i> ✅ Why DeepSearch AI Platform?
+            </h2>
+            <p class="text-xl font-semibold text-ds-blue mb-8">
+                Utilizing South Korea's largest data infrastructure and proprietary AI engine to enable <span class="underline">rapid decision-making and real-time service provision</span>.
+            </p>
+            <div class="mb-8 text-center p-6 bg-white rounded-xl shadow-md border-t-4 border-ds-light-blue">
+                <img src="데이터엔진.png" 
+                    class="mx-auto w-full h-auto"/>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl shadow-xl mb-12 border-l-8 border-ds-accent">
+                <h3 class="text-2xl font-bold text-ds-accent mb-6 flex items-center">
+                    <i class="fas fa-layer-group mr-3"></i> Over 10 Years of Accumulated Data Directly Applicable to AI Services
+                </h3>
+                
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-ds-blue mb-4 flex items-center"><i class="fas fa-database mr-2"></i> Key Datasets Status</h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 border border-gray-200">
+                            <thead class="bg-ds-blue text-white">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider">Category</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider">Key Items</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider">Data Scale/Period</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider">Utility Value</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-ds-blue">Corporate Data</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">Overview, Status, Detailed Finance, Shareholders, Credit, Consensus, etc.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">10+ years, Domestic Listed/Unlisted, US Listed, Competitors</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-ds-accent font-semibold">Precise Corporate Valuation Analysis</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-ds-blue">Market Data</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">Stock Price, Dividend, Return, Trading, Investment Indicators (PER, EPS, etc.)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">All KOSPI/KOSDAQ/KONEX stocks</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-ds-accent font-semibold">Real-time Investment Strategy Formulation</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-ds-blue">Unstructured Documents</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">News, Disclosure, Brokerage Reports, IR, Earnings Calls, Patents, ETF</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">Domestic News 1990~, Disclosure 1999~, IR 2014~, <br>Brokerage Reports 2005~, Patents 1948~</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-ds-accent font-semibold">AI Training and Risk Monitoring</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="grid text-gray-700">
+                    <div class="p-4 bg-ds-bg rounded-lg">
+                        <h4 class="font-bold text-lg mb-2 text-ds-blue flex items-center">
+                            <i class="fas fa-building mr-2 text-ds-accent"></i> Data Examples Utilizing AI
+                        </h4>
+                        <ul class="list-disc list-inside ml-4 text-sm space-y-0.5 mt-4">
+                            <li>AI-based corporate tagging, related industries, ESG information, positive/negative sentiment judgment, and importance applied to domestic/overseas news.</li>
+                            <li>Overseas news/disclosures/earnings calls can be read, understood contextually by AI, and newly written/summarized, then provided in Korean.</li>
+                            <li>Provides insight content free of copyright issues for utilization in AI model training or services.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-4 bg-green-50 rounded-lg text-green-700 font-semibold border border-green-200">
+                    <h4 class="text-xl font-bold mb-2 flex items-center"><i class="fas fa-money-bill-wave mr-2"></i> Cost Reduction Effect</h4>
+                    <p class="text-sm font-normal">
+                        The data trained by AI can be <span class="underline">used immediately</span> without the need to build an AI training system or hire specialized personnel for data collection/processing/refinement.
+                    </p>
+                    <div class="mt-4 overflow-x-auto">
+                        <table class="min-w-full divide-y divide-green-300 border border-green-300">
+                            <thead class="bg-green-100">
+                                <tr>
+                                    <th scope="col" class="px-4 py-2 text-left text-xs font-bold uppercase tracking-wider text-gray-700">Category</th>
+                                    <th scope="col" class="px-4 py-2 text-center text-xs font-bold uppercase tracking-wider text-gray-500">When Self-Built/Operated</th>
+                                    <th scope="col" class="px-4 py-2 text-center text-xs font-bold uppercase tracking-wider text-ds-accent">When DeepSearch Platform is Introduced</th>
+                                    <th scope="col" class="px-4 py-2 text-center text-xs font-bold uppercase tracking-wider text-blue-600">Savings Effect</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-green-200">
+                                <tr>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-ds-blue">Data Processing/Refinement Cost</td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-center">High</td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-center">**Zero**</td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-center font-bold text-red-600">100% Savings</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-ds-blue">Professional Personnel (MLOps/Data Eng.) Cost</td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-center">High</td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-center">**Minimized** (Operations personnel only)</td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-center font-bold text-red-600">Over 80% Savings</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl shadow-xl border-l-8 border-ds-blue">
+                <h3 class="text-2xl font-bold text-ds-blue mb-6 flex items-center">
+                    <i class="fas fa-arrows-to-dot mr-3"></i> Powerful Insights from AI-Connected Data
+                </h3>
+                <p class="text-gray-700 mb-6">
+                    The true strength lies not just in listing data, but in <span class="underline">intelligently connecting data and generating synergy using AI technology</span>.
+                </p>
+
+                <div class="space-y-4">
+                    <div class="p-4 bg-ds-bg rounded-lg border-b-2 border-ds-light-blue flex items-start">
+                        <i class="fas fa-chart-pie text-3xl text-ds-light-blue mr-4 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-xl text-ds-light-blue mb-1">Market + News, Disclosure Linkage Analysis</h4>
+                            <p class="text-gray-700 text-base">
+                                Provides key insights related to the direction of a stock instantly by mapping 'stock price fluctuations' and the 'news/disclosures that caused them' in real-time. (e.g., Automated analysis of price volatility causes possible)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-ds-bg rounded-lg border-b-2 border-ds-light-blue flex items-start">
+                        <i class="fas fa-sitemap text-3xl text-ds-light-blue mr-4 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-xl text-ds-light-blue mb-1">Company + Multi-Unstructured Document Integrated Analysis</h4>
+                            <p class="text-gray-700 text-base">
+                                Provides data that can determine critical risks or investment directions for a company by connecting major corporate events with news, disclosures, and brokerage reports.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-ds-bg rounded-lg border-b-2 border-ds-light-blue flex items-start">
+                        <i class="fas fa-link text-3xl text-ds-light-blue mr-4 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-xl text-ds-light-blue mb-1">External Data + Internal Data Integrated Knowledge Infrastructure</h4>
+                            <p class="text-gray-700 text-base">
+                                Enables the construction of a searchable and Q&A-capable knowledge infrastructure by integrating the company's internal data and documents with external data.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="mt-6 text-lg font-medium text-gray-700">
+                    <li>Vast data can be connected in various ways to derive meaningful insights.</li> <li>Information can be extracted quickly and accurately using the DeepSearch search engine.</li> <li><b>Maximizes efficiency in supporting rapid decision-making and providing real-time services.</b></li> </p>
+            </div>
+        </section>
+
+<section id="use-cases" class="mb-20">
+    <h2 class="text-3xl font-bold text-ds-light-blue mb-10 border-b-4 border-ds-light-blue pb-2 flex items-center">
+        <i class="fas fa-cogs mr-3"></i> 🛠️ Use Case Services: News + Company + Market Data Connection
+    </h2>
+    <p class="text-gray-700 mb-8">Provides automatically generated reports based on vast news data, domestic/overseas company information, and market information.</p>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="p-5 bg-white rounded-xl shadow-lg border-l-4 border-ds-accent flex items-start col-span-full">
+            <i class="fas fa-file-invoice text-3xl text-ds-accent mr-3"></i>
+            <div>
+                <h3 class="font-bold text-xl text-ds-accent mb-1">AI Automated Report Generation</h3>
+                <p class="text-sm text-gray-600">Supports the creation of an <b>AI Analyst Report</b> by connecting various data, including news, company information, and market information.</p>
+                
+             <h4 class="text-sm text-gray-800 mb-2">(Securities Company AI Automated Report Generation Screen)</h4>
+                <div class="grid grid-cols-4 gap-2 mt-4">
+                    <img src="a.png" alt="AI Automated Report Example 1" class="w-full h-auto rounded">
+                    <img src="b.png" alt="AI Automated Report Example 2" class="w-full h-auto rounded">
+                    <img src="c.png" alt="AI Automated Report Example 3" class="w-full h-auto rounded">
+                    <img src="d.png" alt="AI Automated Report Example 4" class="w-full h-auto rounded">
+                </div>
+            </div>
+        </div>
+        <div class="p-5 bg-white rounded-xl shadow-lg border-l-4 border-ds-accent flex items-start col-span-full">
+            <i class="fas fa-calendar-day text-3xl text-ds-accent mr-3"></i>
+            <div>
+                <h3 class="font-bold text-xl text-ds-accent mb-1">Daily Briefing</h3>
+                <p class="text-sm text-gray-600">Analyzes and provides the <b>daily reasons for fluctuation</b> of all stocks and ETFs listed in Korea and the United States.</p>
+                
+             <h4 class="text-sm text-gray-800 mb-2">(Daily Briefing Service Screen)</h4>
+                <div class="grid grid-cols-2 gap-2 mt-4">
+                    <img src="e.png" alt="Daily Briefing Example 1" class="w-full h-auto rounded">
+                    <img src="f.png" alt="Daily Briefing Example 2" class="w-full h-auto rounded">
+                </div>
+                <div class="mt-4">
+                    <img src="g.png" alt="Daily Briefing Example 3 (Expanded)" class="w-full h-auto rounded">
+                </div>
+            </div>
+        </div>
+        <div class="p-5 bg-white rounded-xl shadow-lg border-l-4 border-ds-accent flex items-start col-span-full">
+            <i class="fas fa-user-check text-3xl text-ds-accent mr-3"></i>
+            <div>
+                <h3 class="font-bold text-xl text-ds-accent mb-1">Personalized Reports and Alert Integration</h3>
+                <p class="text-sm text-gray-600">Provides briefings on individual portfolios and can be linked to <b>customer alert services</b>.</p>
+            
+             <h4 class="text-sm text-gray-800 mb-2">(Personalized Service and Alert Example)</h4>
+                <div class="grid grid-cols-2 gap-2">
+                    <img src="h.png" alt="Personalized Report Example 1" class="w-full h-auto rounded">
+                    <img src="i.png" alt="Personalized Report Example 2" class="w-full h-auto rounded">
+                </div>
+            </div>
+            </div>
+        
+        <div class="p-5 bg-white rounded-xl shadow-lg border-l-4 border-ds-accent col-span-full">
+            <i class="fas fa-sparkles text-3xl text-ds-accent mr-3"></i>
+            <div>
+                <h3 class="font-bold text-xl text-ds-accent mb-2 flex items-center"><i class="fas fa-chart-pie mr-2"></i> Insights</h3>
+                <p class="text-sm text-gray-600">Analyzes and provides issues for **small and medium-sized overseas stocks** automatically, in natural Korean, without copyright issues.</p>
+                
+             <h4 class="text-sm text-gray-800 mb-2">(AI-Utilized Insight Service View)</h4>
+                    <img src="z.png" alt="Large Insight Image" class="w-full h-auto rounded">
+                </div>
+            </div>
+        <div class="p-5 bg-white rounded-xl shadow-lg border-l-4 border-ds-accent col-span-full">
+            <h3 class="font-bold text-xl text-ds-accent mb-2 flex items-center"><i class="fas fa-shield-alt mr-2"></i> Risk Monitoring</h3>
+            <p class="text-sm text-gray-600">
+                Connection possible with Company + News + Disclosure + Brokerage Reports + Internal Documents Integration, with **AI monitoring 24/7**.<br>
+                Monitors news and disclosures for stocks held by customers in real-time, **detecting abnormal signs** and issuing early warnings. **AI learns internal guidelines** to determine whether an individual news item actually constitutes a risk factor.
+            </p>
+            
+             <h4 class="text-sm text-gray-800 mb-2">(Financial Institution Risk Monitoring Service Setup Example)</h4>
+            <div class="grid grid-cols-4 gap-2">
+                <img src="k.png" alt="Risk Monitoring Example 1" class="w-full h-auto rounded">
+                <img src="l.png" alt="Risk Monitoring Example 2" class="w-full h-auto rounded">
+                <img src="m.png" alt="Risk Monitoring Example 3" class="w-full h-auto rounded">
+            </div>
+            <div class="mt-3 p-3 bg-red-50 rounded-lg text-red-600 border border-red-200 text-sm font-semibold flex items-center">
+                <i class="fas fa-bell mr-2"></i>
+                Alerts are sent via app push notifications, text messages, KakaoTalk messages, etc. Monitors all listed domestic companies, and AI makes judgments based on actual internal guides, not just simple keyword matching, and notifies the results.
+            </div>
+        </div>
+        <div class="p-5 bg-white rounded-xl shadow-lg border-l-4 border-ds-accent col-span-full">
+            <h3 class="font-bold text-xl text-ds-accent mb-2 flex items-center"><i class="fas fa-brain mr-2"></i> Internal Data Integration, Advanced Knowledge Infrastructure</h3>
+            <p class="text-sm text-gray-600">
+                Brokerage Reports, IR + Internal Data integration is possible, enabling **Q&A** on content that users are curious about. 
+            </p>
+            
+             <h4 class="text-sm text-gray-800 mb-2">(Financial Institution Infrastructure Service Setup Example)</h4>
+            <div class="grid grid-cols-2 gap-2">
+                <img src="o.png" alt="Internal Data Integration Example 1" class="w-full h-auto rounded">
+                <img src="p.png" alt="Internal Data Integration Example 2" class="w-full h-auto rounded">
+            </div>
+        </div>
+        <div class="p-5 bg-white rounded-xl shadow-lg border-l-4 border-ds-accent col-span-full">
+            <h3 class="font-bold text-xl text-ds-accent mb-2 flex items-center"><i class="fas fa-arrow-trend-up mr-2"></i> Investment Information Service</h3>
+            <p class="text-sm text-gray-600">
+                Construction of related information services using diverse data is possible. <br>(Example: Providing news, AI-selected insights, today's keywords, and ETF content in a securities company's MTS. Providing indices, notable stocks, trending investment news, and company information (domestic/overseas) in a bank app.)
+            </p>
+            <div class="mt-4">
+                <h4 class="text-sm text-gray-800 mb-2">(Securities Company MTS Example)</h4>
+                <div class="grid grid-cols-3 gap-2">
+                    <img src="q.png" alt="MTS Example 1" class="w-full h-auto rounded">
+                    <img src="r.png" alt="MTS Example 2" class="w-full h-auto rounded">
+                    <img src="s.png" alt="MTS Example 3" class="w-full h-auto rounded">
+                </div>
+            </div>
+            <div class="mt-4">
+                <h4 class="text-sm text-gray-800 mb-2">(Bank App Example) </h4>
+                <div class="grid grid-cols-4 gap-2">
+                    <img src="t.png" alt="Bank App Example 1" class="w-full h-auto rounded">
+                    <img src="u.png" alt="Bank App Example 2" class="w-full h-auto rounded">
+                    <img src="v.png" alt="Bank App Example 3" class="w-full h-auto rounded">
+                    <img src="w.png" alt="Bank App Example 4" class="w-full h-auto rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        <section id="business-model" class="mb-20">
+            <div class="bg-ds-blue text-white p-10 rounded-xl shadow-2xl mb-12">
+                <h2 class="text-3xl font-bold mb-4 border-b-2 border-white/50 pb-2">
+                    <i class="fas fa-chart-bar mr-2"></i> Innovation of Labor-Intensive, High-Cost Content
+                </h2>
+                <p class="text-xl font-light">
+                    DeepSearch AI Platform **generates high-cost, labor-intensive content at significantly lower costs**.
+                </p>
+                <img src="콘텐츠.png" class="w-full h-auto rounded">
+            </div>
+
+<style>
+    /* Custom Font for Korean readability (Kept for reference if original font is needed) */
+    body {
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    /* Custom Scrollbar for aesthetics */
+    body::-webkit-scrollbar {
+        width: 8px;
+    }
+    body::-webkit-scrollbar-thumb {
+        background-color: #60a5fa;
+        border-radius: 4px;
+    }
+    body::-webkit-scrollbar-track {
+        background-color: #f1f5f9;
+    }
+    /* Chart Placeholder Style */
+    .chart-placeholder {
+        height: 150px;
+        background-color: #e0f2f1;
+        border: 1px dashed #4db6ac;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #00796b;
+        font-weight: 700;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+    /* 🎨 SVG 아이콘 크기 및 색상 정의 (크기 조절 핵심 위치) */
+    .model-svg-icon {
+        width: 45px; /* Width setting */
+        height: 45px; /* Height setting */
+        color: #10b981; /* ds-accent color */
+    }
+</style>
+
+<h2 class="text-3xl font-bold text-ds-light-blue mb-10 border-b-4 border-ds-light-blue pb-2 flex items-center">
+    📊 DeepSearch Business Model
+</h2>
+<p class="text-gray-700 mb-8">We can provide comprehensive support for areas requiring AI utilization and the planning/advancement of AI services.</p>
+
+<div class="grid md:grid-cols-4 gap-6 text-center">
+    <div class="p-5 bg-white rounded-xl shadow-lg border-t-4 border-ds-accent">
+        <svg class="model-svg-icon mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 19c6.075 0 11-4.925 11-11S17.075-3 11-3 0 1.925 0 8s4.925 11 11 11zM21 21l-4.35-4.35M7 3h10v10H7z"/>
+            <path d="M7 3h10v10H7z" />
+            <path d="M7 7h10" />
+            <path d="M7 11h10" />
+        </svg>
+        <h3 class="text-xl font-bold text-ds-accent mb-1">Information</h3>
+        <p class="text-sm text-gray-600">Corporate Information Service (Company, Stock, ETF Info) <span class="block font-bold text-ds-blue mt-1">-> AI Analyst</span></p>
+    </div>
+    
+    <div class="p-5 bg-white rounded-xl shadow-lg border-t-4 border-ds-accent">
+        <svg class="model-svg-icon mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3h.01"></path>
+            <path d="M16.5 7.5L12 12 7.5 7.5"></path>
+            <path d="M12 12L12 21"></path>
+            <path d="M3 16.5h18"></path>
+            <path d="M3 16.5c-2.2 0-3 1.5-3 1.5s.8 1.5 3 1.5h18c2.2 0 3-1.5 3-1.5s-.8-1.5-3-1.5h-18z"></path>
+        </svg>
+        <h3 class="text-xl font-bold text-ds-accent mb-1">Valuation</h3>
+        <p class="text-sm text-gray-600">Corporate Valuation Service (Common/Preferred Stock, RCPS, Stock Options) <span class="block font-bold text-ds-blue mt-1">-> AI Valuation Expert</span></p>
+    </div>
+    
+    <div class="p-5 bg-white rounded-xl shadow-lg border-t-4 border-ds-accent">
+        <svg class="model-svg-icon mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 19H7c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2z"></path>
+            <path d="M17 19L21 21M7 5L3 3"></path>
+            <path d="M12 12l2 2-2 2-2-2 2-2z"></path>
+            <path d="M17 7h-2c-1.1 0-2 .9-2 2v2"></path>
+            <path d="M7 17h2c1.1 0 2-.9 2-2v-2"></path>
+        </svg>
+        <h3 class="text-xl font-bold text-ds-accent mb-1">Brokerage</h3>
+        <p class="text-sm text-gray-600">Corporate Brokerage Platform (M&A, Due Diligence/Valuation, Acquisition Financing Support) <span class="block font-bold text-ds-blue mt-1">-> AI M&A Expert</span></p>
+    </div>
+    
+    <div class="p-5 bg-white rounded-xl shadow-lg border-t-4 border-ds-accent">
+        <svg class="model-svg-icon mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18M18.73 10.73L12 18 7 13 3 17"></path>
+            <path d="M18.73 10.73V18h-7.27"></path>
+        </svg>
+        <h3 class="text-xl font-bold text-ds-accent mb-1">Management</h3>
+        <p class="text-sm text-gray-600">Financial Product Management (ETF Index Development/Management, Direct Indexing) <span class="block font-bold text-ds-blue mt-1">-> AI Investment Expert</span></p>
+    </div>
+</div>
+        
+            <div class="mt-12 p-8 bg-white rounded-xl shadow-xl border-l-8 border-gray-400">
+                <h3 class="text-2xl font-bold text-gray-700 mb-4 flex items-center">
+                    <i class="fas fa-award mr-3"></i> Reference
+                </h3>
+                <p class="text-lg font-medium text-gray-600">
+                    A leading Enterprise AI company recognized for its technology by the **National Pension Service, Korea Exchange, and numerous large financial institutions**.
+                </p>
+                <img src="레퍼런스.png" 
+                    class="mx-auto w-full h-auto"/>
+            </div>
+        </section>
+
     </main>
 
-    <footer style="text-align: center; padding: 20px; background-color: #eee; color: #666;">
-        <p>&copy; 2025 DeepSearch Finorma. All rights reserved.</p>
+    <footer class="bg-ds-blue text-white py-10">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-4">Inquiry for Introduction</h3>
+            <p class="text-lg mb-6">
+                Please feel free to contact us anytime if you would like a detailed **demo or PoC**.
+            </p>
+            <div class="space-y-2 font-medium">
+                <p><i class="fas fa-globe mr-2 text-ds-accent"></i> Website: <a href="https://finorma.deepsearch.com/" target="_blank" class="text-ds-accent hover:underline">https://finorma.deepsearch.com/</a></p>
+                <p><i class="fas fa-envelope mr-2 text-ds-accent"></i> Contact: <a href="mailto:contact@deepsearch.com" class="text-ds-accent hover:underline">contact@deepsearch.com</a></p>
+            </div>
+            <p class="mt-8 text-sm opacity-70">&copy; 2025 DeepSearch AI Platform. All rights reserved.</p>
+        </div>
     </footer>
 
 </body>
